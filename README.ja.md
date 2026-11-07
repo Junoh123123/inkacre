@@ -110,8 +110,10 @@ inkacre --help
 
 ```sh
 docker build -t inkacre .
-docker run -d --name inkacre -p 127.0.0.1:4141:4141 -v pageyard-data:/data inkacre
+docker run -d --name inkacre -p 127.0.0.1:4141:4141 -v inkacre-data:/data inkacre
 ```
+
+既存の Docker 環境を更新するときは、使用中のデータボリュームを引き続き指定してください。
 
 ポートは必ず `127.0.0.1` だけに公開してください。[セキュリティ](#セキュリティ)を参照。
 
@@ -123,13 +125,9 @@ docker run -d --name inkacre -p 127.0.0.1:4141:4141 -v pageyard-data:/data inkac
 
 ## データ
 
-| システム | 既定のフォルダー |
-| --- | --- |
-| macOS | `~/Library/Application Support/Pageyard` |
-| Windows | `%APPDATA%\Pageyard` |
-| Linux | `$XDG_DATA_HOME/pageyard`（通常 `~/.local/share/pageyard`） |
+Inkacre は既定で OS のアプリデータディレクトリに保存します。保存先を指定するには、`--data <フォルダー>` または `LOCAL_WORKSPACE_DATA` を使います。更新時も同じフォルダーを指定してください。
 
-以前のバージョンの `data-live/` や `data/` フォルダーがリポジトリ内にあれば、そのまま使い続けます（`data-live/` を優先）。フォルダーには `workspace.sqlite` と
+フォルダーには `workspace.sqlite` と
 `blobs/`（添付ファイル）があり、新しく作ったほかのワークスペースはその中の `workspaces/<id>/` に保存されます。バックアップは左下の **?** メニューの **バックアップを作成** から作り、復元は新しい
 フォルダーに行います。
 

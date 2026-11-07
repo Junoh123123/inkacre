@@ -10,8 +10,6 @@ Inkacre는 익숙한 블록·데이터베이스 방식의 1인용 로컬 작업 
 클라우드도 사용 기록 전송도 없습니다. 웹 화면, AI 에이전트용 MCP 서버, 명령 엔진이 같은 파일을 쓰기 때문에 에이전트도 내가
 보는 페이지를 그대로 고칩니다. 내 변경이든 에이전트의 변경이든 모두 기록되고 되돌릴 수 있습니다.
 
-Inkacre는 Pageyard의 기존 워크스페이스 폴더를 그대로 열고 `pageyard` 명령도 계속 지원합니다. 처음 Inkacre를 열기 전에 이전 앱을 종료하세요.
-
 ## 흔한 노트 앱에는 없는 것
 
 - **타임머신** — 지난 어느 시점의 워크스페이스 전체를 별도 탭에서 읽기 전용으로 열고, 페이지를 지금으로 되살리거나 복사본으로 꺼냅니다.
@@ -87,8 +85,6 @@ npm start
 
 ![환영 화면](docs/screenshots/welcome.png)
 
-이전에 npm으로 Pageyard를 전역 설치했다면 Inkacre를 설치하기 전에 `npm uninstall -g pageyard`를 실행하세요. 워크스페이스는 별도 폴더에 저장됩니다.
-
 어디서나 명령으로 쓰려면 폴더에서 전역 설치합니다.
 
 ```sh
@@ -110,8 +106,10 @@ inkacre --help
 
 ```sh
 docker build -t inkacre .
-docker run -d --name inkacre -p 127.0.0.1:4141:4141 -v pageyard-data:/data inkacre
+docker run -d --name inkacre -p 127.0.0.1:4141:4141 -v inkacre-data:/data inkacre
 ```
+
+기존 Docker 설치를 업데이트할 때는 사용하던 데이터 볼륨을 다시 지정하세요.
 
 포트는 반드시 `127.0.0.1`에만 엽니다. [보안](#보안)을 참고하세요.
 
@@ -123,15 +121,8 @@ docker run -d --name inkacre -p 127.0.0.1:4141:4141 -v pageyard-data:/data inkac
 
 ## 내 데이터
 
-| 시스템 | 기본 폴더 |
-| --- | --- |
-| macOS | `~/Library/Application Support/Pageyard` |
-| Windows | `%APPDATA%\Pageyard` |
-| Linux | `$XDG_DATA_HOME/pageyard` (보통 `~/.local/share/pageyard`) |
+Inkacre는 기본적으로 운영체제의 앱 데이터 디렉터리에 저장합니다. 저장할 폴더를 직접 선택하려면 `--data <폴더>` 또는 `LOCAL_WORKSPACE_DATA`를 사용하세요. 업데이트할 때도 같은 폴더를 지정하세요.
 
-예전 버전에서 쓰던 `data-live/`나 `data/` 폴더가 소스 폴더 안에 있으면 그 폴더를 계속 씁니다(`data-live/` 우선).
-그 소스에서 설치형 앱으로 옮길 때는 `LOCAL_WORKSPACE_DATA`를 기존 데이터 폴더로 지정하세요.
-이미 `--data`나 `LOCAL_WORKSPACE_DATA`로 경로를 지정했다면 같은 경로를 계속 쓰면 됩니다.
 데이터 폴더에는 `workspace.sqlite`와 `blobs/`(첨부
 파일)가 있고, 새로 만든 다른 워크스페이스는 그 안의 `workspaces/<id>/`에 저장됩니다. 백업은 왼쪽 아래 **?** 메뉴의 **백업 만들기**로 만들고, 복원은 새 폴더로 합니다.
 

@@ -118,8 +118,10 @@ Iniciá-lo de novo enquanto ele está em execução apenas abre o app que já es
 
 ```sh
 docker build -t inkacre .
-docker run -d --name inkacre -p 127.0.0.1:4141:4141 -v pageyard-data:/data inkacre
+docker run -d --name inkacre -p 127.0.0.1:4141:4141 -v inkacre-data:/data inkacre
 ```
+
+Ao atualizar uma instalação existente no Docker, reutilize o volume de dados.
 
 Publique a porta somente em `127.0.0.1` — veja [Segurança](#segurança).
 
@@ -131,14 +133,9 @@ Depois reinicie o app. A interface já vem compilada em `web/app/`, então a atu
 
 ## Seus dados
 
-| Sistema | Pasta padrão |
-| --- | --- |
-| macOS | `~/Library/Application Support/Pageyard` |
-| Windows | `%APPDATA%\Pageyard` |
-| Linux | `$XDG_DATA_HOME/pageyard` (geralmente `~/.local/share/pageyard`) |
+Por padrão, o Inkacre usa o diretório de dados de aplicativos do sistema operacional. Para escolher outra pasta, use `--data <pasta>` ou defina `LOCAL_WORKSPACE_DATA`. Continue usando a mesma pasta ao atualizar.
 
-Um clone que já tenha uma pasta `data-live/` ou `data/` de versões anteriores continua usando essa pasta (`data-live/`
-primeiro). A pasta contém `workspace.sqlite` e `blobs/` (anexos); os outros espaços de trabalho que você criar ficam
+A pasta contém `workspace.sqlite` e `blobs/` (anexos); os outros espaços de trabalho que você criar ficam
 dentro dela, em `workspaces/<id>/`. Crie um backup pelo menu **?** no canto inferior esquerdo (**Criar backup**) e
 restaure-o em uma nova pasta:
 

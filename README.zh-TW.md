@@ -104,8 +104,10 @@ inkacre --help
 
 ```sh
 docker build -t inkacre .
-docker run -d --name inkacre -p 127.0.0.1:4141:4141 -v pageyard-data:/data inkacre
+docker run -d --name inkacre -p 127.0.0.1:4141:4141 -v inkacre-data:/data inkacre
 ```
+
+更新現有的 Docker 安裝時，請繼續使用原有的資料卷。
 
 連接埠只能發布到 `127.0.0.1`——請參閱[安全性](#安全性)。
 
@@ -117,13 +119,8 @@ docker run -d --name inkacre -p 127.0.0.1:4141:4141 -v pageyard-data:/data inkac
 
 ## 你的資料
 
-| 系統 | 預設資料夾 |
-| --- | --- |
-| macOS | `~/Library/Application Support/Pageyard` |
-| Windows | `%APPDATA%\Pageyard` |
-| Linux | `$XDG_DATA_HOME/pageyard`（通常為 `~/.local/share/pageyard`） |
+Inkacre 預設使用作業系統的應用程式資料目錄。若要指定其他目錄，請使用 `--data <資料夾>` 或設定 `LOCAL_WORKSPACE_DATA`。更新時請繼續使用同一目錄。
 
-如果複製的儲存庫中已有舊版本留下的 `data-live/` 或 `data/` 資料夾，會繼續使用它（優先 `data-live/`）。
 該資料夾包含 `workspace.sqlite` 和 `blobs/`（附件）；你新建的其他工作空間儲存在其中的 `workspaces/<id>/`。
 可以從左下角的 **?** 選單（**建立備份**）建立備份，並還原到新資料夾：
 

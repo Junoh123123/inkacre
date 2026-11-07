@@ -11,8 +11,6 @@ file on your machine: no account, no cloud, no telemetry. The web interface, a b
 the command engine all share that file, so an agent edits the same pages you do — and every change, yours or the
 agent's, is recorded and can be undone.
 
-Inkacre opens the same workspace folders as Pageyard and keeps `pageyard` as a command alias. Quit the previous app before opening Inkacre for the first time.
-
 ## What most note apps don't do
 
 - **Go back in time** — open the whole workspace as it was at any earlier moment, read-only in its own tab, and bring
@@ -97,8 +95,6 @@ start with a short guide and examples or with an empty workspace.
 
 ![Welcome screen](docs/screenshots/welcome.png)
 
-If you already installed Pageyard globally with npm, run `npm uninstall -g pageyard` before installing Inkacre. Your workspace is stored separately.
-
 To use it as a command from anywhere, install it globally from the folder:
 
 ```sh
@@ -120,8 +116,10 @@ Starting it again while it runs just opens the running app.
 
 ```sh
 docker build -t inkacre .
-docker run -d --name inkacre -p 127.0.0.1:4141:4141 -v pageyard-data:/data inkacre
+docker run -d --name inkacre -p 127.0.0.1:4141:4141 -v inkacre-data:/data inkacre
 ```
+
+When updating an existing Docker installation, reuse its data volume.
 
 Publish the port to `127.0.0.1` only — see [Security](#security).
 
@@ -133,15 +131,8 @@ Then restart the app. The interface comes prebuilt in `web/app/`, so updating ne
 
 ## Your data
 
-| System | Default folder |
-| --- | --- |
-| macOS | `~/Library/Application Support/Pageyard` |
-| Windows | `%APPDATA%\Pageyard` |
-| Linux | `$XDG_DATA_HOME/pageyard` (usually `~/.local/share/pageyard`) |
+Inkacre uses your operating system’s application data directory by default. To use a specific folder, pass `--data <folder>` or set `LOCAL_WORKSPACE_DATA`. Keep using that folder when updating.
 
-A source folder with an existing `data-live/` or `data/` folder keeps using it (`data-live/` first).
-When switching from that source folder to a packaged app, set `LOCAL_WORKSPACE_DATA` to the existing folder.
-If you already use `--data` or `LOCAL_WORKSPACE_DATA`, keep pointing it at the same folder.
 The folder holds `workspace.sqlite` and `blobs/` (attachments); other workspaces you create are kept in
 `workspaces/<id>/` inside it. Make a backup from the **?** menu at the bottom left (**Create backup**), and restore one
 into a new folder:

@@ -104,8 +104,10 @@ inkacre --help
 
 ```sh
 docker build -t inkacre .
-docker run -d --name inkacre -p 127.0.0.1:4141:4141 -v pageyard-data:/data inkacre
+docker run -d --name inkacre -p 127.0.0.1:4141:4141 -v inkacre-data:/data inkacre
 ```
+
+更新现有的 Docker 安装时，请继续使用原有的数据卷。
 
 端口只能发布到 `127.0.0.1`——参见[安全](#安全)。
 
@@ -117,13 +119,8 @@ docker run -d --name inkacre -p 127.0.0.1:4141:4141 -v pageyard-data:/data inkac
 
 ## 你的数据
 
-| 系统 | 默认文件夹 |
-| --- | --- |
-| macOS | `~/Library/Application Support/Pageyard` |
-| Windows | `%APPDATA%\Pageyard` |
-| Linux | `$XDG_DATA_HOME/pageyard`（通常为 `~/.local/share/pageyard`） |
+Inkacre 默认使用操作系统的应用数据目录。要指定其他目录，请使用 `--data <文件夹>` 或设置 `LOCAL_WORKSPACE_DATA`。更新时请继续使用同一目录。
 
-如果克隆的仓库中已有旧版本留下的 `data-live/` 或 `data/` 文件夹，会继续使用它（优先 `data-live/`）。
 该文件夹包含 `workspace.sqlite` 和 `blobs/`（附件）；你新建的其他工作空间保存在其中的 `workspaces/<id>/`。
 可以通过左下角的 **?** 菜单（**创建备份**）创建备份，并恢复到新文件夹：
 

@@ -121,8 +121,10 @@ La relancer pendant qu'elle tourne ouvre simplement l'application déjà en cour
 
 ```sh
 docker build -t inkacre .
-docker run -d --name inkacre -p 127.0.0.1:4141:4141 -v pageyard-data:/data inkacre
+docker run -d --name inkacre -p 127.0.0.1:4141:4141 -v inkacre-data:/data inkacre
 ```
+
+Lors de la mise à jour d’une installation Docker existante, réutilisez son volume de données.
 
 Ne publiez le port que sur `127.0.0.1` — voir [Sécurité](#sécurité).
 
@@ -135,14 +137,9 @@ aucune étape de compilation.
 
 ## Vos données
 
-| Système | Dossier par défaut |
-| --- | --- |
-| macOS | `~/Library/Application Support/Pageyard` |
-| Windows | `%APPDATA%\Pageyard` |
-| Linux | `$XDG_DATA_HOME/pageyard` (généralement `~/.local/share/pageyard`) |
+Par défaut, Inkacre utilise le dossier des données d’application du système d’exploitation. Pour choisir un autre dossier, utilisez `--data <dossier>` ou définissez `LOCAL_WORKSPACE_DATA`. Conservez le même dossier lors des mises à jour.
 
-Un clone qui possède déjà un dossier `data-live/` ou `data/` issu d'anciennes versions continue de l'utiliser
-(`data-live/` en priorité). Le dossier contient `workspace.sqlite` et `blobs/` (pièces jointes) ; les autres espaces
+Le dossier contient `workspace.sqlite` et `blobs/` (pièces jointes) ; les autres espaces
 de travail que vous créez sont rangés à l'intérieur, dans `workspaces/<id>/`. Créez une sauvegarde depuis le menu
 **?** en bas à gauche (**Créer une sauvegarde**) et restaurez-la dans un nouveau dossier :
 
