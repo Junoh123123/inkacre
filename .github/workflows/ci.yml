@@ -1,0 +1,49 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  engine:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm test
+
+  interface:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: ui/package-lock.json
+      - run: npm ci
+      - run: npm ci
+        working-directory: ui
+      - name: Type-check and build the interface
+        run: npm run build
+        working-directory: ui
+      - name: Translations are complete (keys re-read from the source first)
+        run: node scripts/i18n/extract.mjs && node scripts/i18n/check.mjs
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t pageyard .
+      - name: Container starts and answers
+        run: |
+          docker run -d --name lw -p 127.0.0.1:4141:4141 pageyard
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:4141/api/state >/dev/null && exit 0; sleep 1; done
+          docker logs lw; exit 1

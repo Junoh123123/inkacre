@@ -1,0 +1,18 @@
+function inline(text){const out=[],re=/\*\*([^*]+)\*\*|~~([^~]+)~~|`([^`]+)`|\*([^*]+)\*/g;let at=0;for(const m of text.matchAll(re)){if(m.index>at)out.push({text:text.slice(at,m.index)});out.push({text:m[1]??m[2]??m[3]??m[4],...(m[1]?{bold:true}:m[2]?{strike:true}:m[3]?{code:true}:{italic:true})});at=m.index+m[0].length}if(at<text.length)out.push({text:text.slice(at)});return out;}
+export function textBlocks(text){const roots=[],stack=[{indent:-1,children:roots}];let fence=false,code=[],language='';
+  for(const line of text.replaceAll('\r\n','\n').split('\n')){const f=line.match(/^\s*```(.*)$/);if(f){if(fence){roots.push({blockType:'code',language,richText:[{text:code.join('\n')}]});fence=false;code=[]}else{fence=true;language=f[1].trim()}continue}if(fence){code.push(line);continue}if(!line.trim())continue;
+    const m=line.match(/^(\s*)(#{1,4} |[-*+] \[[ xX]\] |[-*+] |\d+\. |> )(.*)$/),indent=(m?.[1]??'').replaceAll('\t','    ').length,prefix=m?.[2]??'',type=/^-{3,}$/.test(line.trim())?'divider':prefix.startsWith('#')?`heading${prefix.trim().length}`:prefix.includes('[')?'todo':/^\d/.test(prefix)?'numbered':prefix.startsWith('>')?'quote':prefix?'bullet':'paragraph';
+    while(stack.length>1&&stack.at(-1).indent>=indent)stack.pop();const item={blockType:type,richText:inline(m?.[3]??(type==='divider'?'':line)),...(type==='todo'?{checked:/x/i.test(prefix)}:{}),children:[]};stack.at(-1).children.push(item);if(['bullet','numbered','todo'].includes(type))stack.push({indent,children:item.children});
+  }if(fence)throw new Error('닫히지 않은 코드 블록이 있습니다.');return roots;
+}
+export function htmlBlocks(root,readRich){const result=[];const tags=new Set(['P','DIV','H1','H2','H3','UL','OL','LI','PRE','BLOCKQUOTE','TABLE','HR']);
+  function walk(container,out){let inlineNodes=[];const flush=()=>{if(!inlineNodes.length)return;const holder=container.ownerDocument.createElement('div');for(const node of inlineNodes)holder.append(node.cloneNode(true));const richText=readRich(holder);if(richText.some(r=>r.text.trim()))out.push({blockType:'paragraph',richText});inlineNodes=[]};
+    for(const node of container.childNodes){if(node.nodeType!==1||!tags.has(node.tagName)){if(!['SCRIPT','STYLE','IFRAME','OBJECT','NOSCRIPT'].includes(node.tagName))inlineNodes.push(node);continue}flush();const tag=node.tagName;
+      if(tag==='UL'||tag==='OL'){walk(node,out);continue}if(tag==='DIV'&&[...node.children].some(c=>tags.has(c.tagName))){walk(node,out);continue}
+      if(tag==='TABLE'){const rows=[...node.querySelectorAll('tr')].map(row=>[...row.children].filter(c=>['TD','TH'].includes(c.tagName)).map(cell=>readRich(cell))),width=Math.max(0,...rows.map(r=>r.length));if(width)out.push({blockType:'table',cells:rows.map(row=>[...row,...Array.from({length:width-row.length},()=>[])]),richText:[],tableHeader:{row:!!node.querySelector('tr th'),column:false}});continue}
+      if(tag==='PRE'){const code=node.querySelector('code'),language=(code?.className??'').match(/language-([\w+-]+)/)?.[1]??'';out.push({blockType:'code',language,richText:[{text:node.textContent}]});continue}
+      if(tag==='HR'){out.push({blockType:'divider',richText:[]});continue}
+      const copy=node.cloneNode(true),nested=[...copy.children].filter(c=>['UL','OL'].includes(c.tagName));for(const child of nested)child.remove();const item={blockType:/^H[1234]$/.test(tag)?`heading${tag[1]}`:tag==='BLOCKQUOTE'?'quote':tag==='LI'?(node.parentElement.tagName==='OL'?'numbered':'bullet'):'paragraph',richText:readRich(copy),children:[]};for(const child of nested)walk(child,item.children);out.push(item);
+    }flush();
+  }walk(root,result);return result;
+}

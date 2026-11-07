@@ -1,0 +1,190 @@
+/* Design tokens (light theme). */
+:root {
+  --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Hiragino Sans", "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-mono: SFMono-Regular, Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace;
+  /* The page "Mono" style (a writing mono, then Menlo), unlike code blocks. */
+  --font-page-mono: iawriter-mono, Nitti, Menlo, Courier, monospace;
+  --font-serif: Lyon-Text, Georgia, YuMincho, "Yu Mincho", "Hiragino Mincho ProN", "Nanum Myeongjo", "Songti TC", serif;
+
+  --text: #302536;
+  --text-secondary: #665a6e;
+  --text-tertiary: #716578;
+  --text-quaternary: #8f8298;
+  --text-placeholder: #786c7e;
+  --text-sidebar: #594760;
+  --icon: #47374f;
+  --icon-secondary: #6c5975;
+  --icon-tertiary: #816c8a;
+
+  --bg: #fffaf1;
+  --bg-sidebar: #efe7f5;
+  --bg-hover: rgba(80, 53, 121, 0.085);
+  --bg-hover-strong: rgba(80, 53, 121, 0.14);
+  --bg-card-hover: rgba(80, 53, 121, 0.06);
+  --bg-input: rgba(80, 53, 121, 0.045);
+  --bg-input-panel: #f3ebf6;
+  --bg-code: #f4edf4;
+  --bg-table-header: #f2eaf3;
+  --bg-weekend: #f6eef5;
+  --bg-timeline: var(--bg);
+  --bg-timeline-weekend: #f5eef3;
+  --bg-chip: rgba(80, 53, 121, 0.09);
+  --bg-row-checkbox-hover: rgba(80, 53, 121, 0.07);
+
+  --border: #dfd1e5;
+  --border-soft: #ece1ee;
+  --divider: rgba(80, 53, 121, 0.11);
+  --border-strong: rgba(80, 53, 121, 0.29);
+  --border-checkbox: rgba(80, 53, 121, 0.50);
+  --border-block: rgba(80, 53, 121, 0.21);
+
+  /* Accent tokens retain their existing names; blue content swatches stay blue. */
+  --blue: #5d408d;
+  --blue-hover: #503579;
+  --blue-text: #fff8ee;
+  --blue-focus: #6b4b9f;
+  --blue-select: rgba(107, 75, 159, 0.16);
+  --blue-cell-select: rgba(107, 75, 159, 0.10);
+  --blue-text-select: rgba(107, 75, 159, 0.24);
+  --blue-drop: rgba(107, 75, 159, 0.43);
+  --red-today: #e56458;
+
+  --shadow-menu: 0 20px 24px 0 rgba(25, 25, 25, 0.05), 0 5px 8px 0 rgba(25, 25, 25, 0.027), 0 0 0 1px rgba(42, 28, 0, 0.07);
+  --shadow-card: 0 4px 12px 0 rgba(25, 25, 25, 0.027), 0 1px 2px 0 rgba(25, 25, 25, 0.02), 0 0 0 1px rgba(42, 28, 0, 0.07);
+  --shadow-chip: 0 8px 12px 0 rgba(25, 25, 25, 0.027), 0 2px 6px 0 rgba(25, 25, 25, 0.027), 0 0 0 1px rgba(42, 28, 0, 0.07);
+  --shadow-event: 0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(42, 28, 0, 0.07);
+  --shadow-modal: 0 24px 48px 0 rgba(25, 25, 25, 0.24), 0 4px 12px 0 rgba(25, 25, 25, 0.14), 0 0 0 1px rgba(42, 28, 0, 0.07);
+  --shadow-focus-ring: 0 0 0 1px var(--blue-focus) inset, 0 0 0 1px var(--blue-focus);
+
+  --radius-xs: 3px;
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-dialog: 20px;
+
+  --sidebar-width: 270px;
+  --topbar-height: 44px;
+  --page-width: 720px;
+  --page-padding: 96px;
+  --db-padding: 104px;
+
+  /* text colours */
+  --c-default: var(--text); --c-gray: #7d7a75; --c-brown: #9f765a; --c-orange: #d27b2d; --c-yellow: #cb9434;
+  --c-green: #50946e; --c-blue: #387dc9; --c-purple: #9a6bb4; --c-pink: #c14c8a; --c-red: #cf5148;
+  /* block background colours (swatches) */
+  --bgc-gray: #f0efed; --bgc-brown: #f5ede9; --bgc-orange: #fbebde; --bgc-yellow: #f9f3dc; --bgc-green: #e8f1ec;
+  --bgc-blue: #e5f2fc; --bgc-purple: #f3ebf9; --bgc-pink: #fae9f1; --bgc-red: #fce9e7;
+  /* swatch rings = tag backgrounds */
+  --ring-default: rgba(28, 19, 1, 0.11); --ring-gray: rgba(28, 19, 1, 0.11); --ring-brown: rgba(127, 51, 0, 0.157); --ring-orange: rgba(196, 88, 0, 0.204);
+  --ring-yellow: rgba(209, 156, 0, 0.282); --ring-green: rgba(0, 96, 38, 0.157); --ring-blue: rgba(0, 118, 217, 0.204); --ring-purple: rgba(92, 0, 163, 0.14);
+  --ring-pink: rgba(183, 0, 78, 0.153); --ring-red: rgba(206, 24, 0, 0.165);
+  /* tag text */
+  --tag-default: #494846; --tag-gray: #494846; --tag-brown: #584437; --tag-orange: #6a4222; --tag-yellow: #655121; --tag-green: #2a533c;
+  --tag-blue: #264a72; --tag-purple: #553b69; --tag-pink: #68354e; --tag-red: #6d3531;
+  /* status dots */
+  --dot-default: #8e8b86; --dot-gray: #8e8b86; --dot-brown: #b68965; --dot-orange: #d5803b; --dot-yellow: #d8a32f; --dot-green: #46a171;
+  --dot-blue: #2783de; --dot-purple: #b577d6; --dot-pink: #db6999; --dot-red: #e56458;
+  /* board column backgrounds */
+  --col-default: rgba(66, 35, 3, 0.03); --col-gray: rgba(66, 35, 3, 0.03); --col-brown: rgba(115, 59, 3, 0.035); --col-orange: rgba(186, 72, 3, 0.043);
+  --col-yellow: rgba(207, 175, 0, 0.063); --col-green: rgba(3, 87, 31, 0.035); --col-blue: rgba(0, 128, 213, 0.047); --col-purple: rgba(98, 3, 161, 0.031);
+  --col-pink: rgba(161, 3, 66, 0.031); --col-red: rgba(199, 3, 3, 0.035);
+  /* board group title / "new page" text colours */
+  --grp-default: #8e8b86; --grp-gray: #8e8b86; --grp-brown: #b68965; --grp-orange: #d5803b; --grp-yellow: #d8a32f; --grp-green: #46a171;
+  --grp-blue: #2783de; --grp-purple: #b577d6; --grp-pink: #db6999; --grp-red: #e56458;
+}
+
+/* Dark theme for the same tokens. Literal colours in other stylesheets are paired by theme/dark.mjs. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --text: #f4eaf4;
+  --text-secondary: #c7b7ce;
+  --text-tertiary: #ad9ab8;
+  --text-quaternary: #8c789a;
+  --text-placeholder: #a28eae;
+  --text-sidebar: #d0bedb;
+  --icon: #e4d2eb;
+  --icon-secondary: #c0abcb;
+  --icon-tertiary: #a990b5;
+
+  --bg: #211a2a;
+  --bg-sidebar: #2e233b;
+  --bg-hover: rgba(207, 177, 239, 0.10);
+  --bg-hover-strong: rgba(207, 177, 239, 0.17);
+  --bg-card-hover: rgba(207, 177, 239, 0.07);
+  --bg-input: rgba(207, 177, 239, 0.08);
+  --bg-input-panel: #332741;
+  --bg-code: #2c2337;
+  --bg-table-header: #302539;
+  --bg-weekend: #2a2233;
+  --bg-timeline: var(--bg);
+  --bg-timeline-weekend: #2c2437;
+  --bg-chip: rgba(207, 177, 239, 0.13);
+  --bg-row-checkbox-hover: rgba(207, 177, 239, 0.08);
+
+  --border: #493852;
+  --border-soft: #36283f;
+  --divider: rgba(207, 177, 239, 0.15);
+  --border-strong: rgba(207, 177, 239, 0.31);
+  --border-checkbox: rgba(207, 177, 239, 0.50);
+  --border-block: rgba(207, 177, 239, 0.23);
+
+  --blue: #cbb3ee;
+  --blue-hover: #dbc4f5;
+  --blue-text: #27183b;
+  --blue-focus: #c6a8ee;
+  --blue-select: rgba(198, 168, 238, 0.21);
+  --blue-cell-select: rgba(198, 168, 238, 0.12);
+  --blue-text-select: rgba(198, 168, 238, 0.34);
+  --blue-drop: rgba(198, 168, 238, 0.48);
+
+  --shadow-menu: 0 0 0 1px var(--border), 0 14px 28px -6px rgba(25, 25, 25, 0.2), 0 2px 4px -1px rgba(25, 25, 25, 0.118);
+  --shadow-card: 0 0 0 1px var(--border), 0 2px 4px 0 rgba(25, 25, 25, 0.078);
+  --shadow-chip: 0 0 0 1px var(--border), 0 4px 12px -2px rgba(25, 25, 25, 0.078);
+  --shadow-event: 0 0 0 1px var(--border), 0 2px 4px 0 rgba(25, 25, 25, 0.078);
+  --shadow-modal: 0 0 0 1px var(--border), 0 24px 48px 0 rgba(25, 25, 25, 0.64), 0 4px 12px 0 rgba(25, 25, 25, 0.56);
+
+  --c-default: var(--text);
+  --bgc-gray: #383836; --bgc-brown: #45362d; --bgc-orange: #53361f; --bgc-yellow: #504425; --bgc-green: #263d30;
+  --bgc-blue: #233850; --bgc-purple: #3c2d47; --bgc-pink: #4e2b3c; --bgc-red: #502c29;
+  --ring-default: rgba(255, 252, 235, 0.306); --ring-gray: rgba(255, 252, 235, 0.306); --ring-brown: rgba(255, 184, 132, 0.365); --ring-orange: rgba(255, 143, 71, 0.482);
+  --ring-yellow: rgba(255, 188, 53, 0.459); --ring-green: rgba(113, 255, 175, 0.337); --ring-blue: rgba(81, 166, 255, 0.494); --ring-purple: rgba(208, 147, 255, 0.427);
+  --ring-pink: rgba(255, 133, 192, 0.427); --ring-red: rgba(255, 116, 105, 0.525);
+  --tag-default: #f0efed; --tag-gray: #f0efed; --tag-brown: #f5ede9; --tag-orange: #fbebde; --tag-yellow: #f9f3dc; --tag-green: #e8f1ec;
+  --tag-blue: #e5f2fc; --tag-purple: #f3ebf9; --tag-pink: #fae9f1; --tag-red: #fce9e7;
+  --col-default: rgba(252, 252, 252, 0.03); --col-gray: rgba(252, 252, 252, 0.03); --col-brown: rgba(253, 158, 101, 0.051); --col-orange: rgba(254, 139, 71, 0.043);
+  --col-yellow: rgba(255, 232, 48, 0.043); --col-green: rgba(83, 255, 140, 0.035); --col-blue: rgba(41, 139, 253, 0.063); --col-purple: rgba(196, 101, 253, 0.051);
+  --col-pink: rgba(255, 78, 149, 0.055); --col-red: rgba(251, 107, 107, 0.047);
+}
+
+/* Japanese and Chinese interfaces put their own fonts before the Korean ones so shared characters take the right shapes. */
+:root:lang(ja) { --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", Meiryo, "Apple SD Gothic Neo", "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+:root:lang(zh-CN) { --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Hiragino Sans GB", "Apple SD Gothic Neo", "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+:root:lang(zh-TW) { --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", "Apple SD Gothic Neo", "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+
+/* 고대비 (설정 › 고대비): darker secondary text and icons, stronger dividers and borders, a thicker focus ring. */
+:root[data-contrast="high"] {
+  --text: #000000; --text-secondary: #37352f; --text-tertiary: #4f4c46; --text-quaternary: #6b6862; --text-placeholder: rgba(0, 0, 0, 0.55); --text-sidebar: #1d1c1a;
+  --icon: #000000; --icon-secondary: #37352f; --icon-tertiary: #55524c;
+  --bg-hover: rgba(0, 0, 0, 0.09); --bg-hover-strong: rgba(0, 0, 0, 0.14); --bg-chip: rgba(0, 0, 0, 0.12);
+  --border: #6f6c66; --border-soft: #9b9892; --divider: rgba(0, 0, 0, 0.3); --border-strong: rgba(0, 0, 0, 0.55); --border-checkbox: rgba(0, 0, 0, 0.7); --border-block: rgba(0, 0, 0, 0.45);
+  --c-gray: #55524c; --c-brown: #6e4b33; --c-orange: #9a4f0f; --c-yellow: #7f5a0c; --c-green: #1f6a43; --c-blue: #1a5ea8; --c-purple: #6c3d8c; --c-pink: #962a64; --c-red: #a7271f;
+  --blue: #482374; --blue-hover: #351659; --blue-focus: #482374;
+  --shadow-menu: 0 20px 24px 0 rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.45);
+  --shadow-card: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.35);
+  --shadow-chip: 0 2px 6px 0 rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.4);
+  --shadow-modal: 0 24px 48px 0 rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.5);
+  --shadow-focus-ring: 0 0 0 2px var(--blue-focus) inset, 0 0 0 2px var(--blue-focus);
+}
+:root[data-theme="dark"][data-contrast="high"] {
+  --text: #ffffff; --text-secondary: #e3e2e0; --text-tertiary: #c9c7c3; --text-quaternary: #aeaca7; --text-placeholder: rgba(255, 255, 255, 0.6); --text-sidebar: #f2f1ef;
+  --icon: #ffffff; --icon-secondary: #e3e2e0; --icon-tertiary: #c4c2bd;
+  --bg-hover: rgba(255, 255, 255, 0.12); --bg-hover-strong: rgba(255, 255, 255, 0.18); --bg-chip: rgba(255, 255, 255, 0.16);
+  --border: #a19e99; --border-soft: #7d7a75; --divider: rgba(255, 255, 255, 0.35); --border-strong: rgba(255, 255, 255, 0.6); --border-checkbox: rgba(255, 255, 255, 0.75); --border-block: rgba(255, 255, 255, 0.5);
+  --blue: #e2c6ff; --blue-hover: #f0daff; --blue-focus: #e2c6ff;
+  --shadow-menu: 0 0 0 1px rgba(255, 255, 255, 0.5); --shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.4); --shadow-chip: 0 0 0 1px rgba(255, 255, 255, 0.45); --shadow-modal: 0 0 0 1px rgba(255, 255, 255, 0.55);
+  --shadow-focus-ring: 0 0 0 2px var(--blue-focus) inset, 0 0 0 2px var(--blue-focus);
+}
+:root[data-contrast="high"] :focus-visible { outline: 2px solid var(--blue-focus); outline-offset: 2px; }
+:root[data-contrast="high"] a { text-decoration-thickness: 2px; }

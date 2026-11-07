@@ -1,0 +1,6 @@
+#!/bin/sh
+# Inkacre: with no arguments, starts it in the background (or finds it running) and opens it in the browser.
+# With arguments it is the command line: ./inkacre capture "a line", ./inkacre --help, …
+here=$(cd "$(dirname "$0")" && pwd)
+if [ $# -eq 0 ]; then set -- app; fi
+exec "$here/runtime/node" --disable-warning=ExperimentalWarning "$here/app/bin/cli.mjs" "$@"

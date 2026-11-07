@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Inkacre</title><link rel="icon" href="/app/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/katex.min.css"><link rel="stylesheet" href="/highlight.css">
+</head>
+<body>
+  <div id="shell">
+    <nav id="sidebar" aria-label="페이지 탐색">
+      <div class="sidebar-head">
+        <button id="sidebar-toggle" class="icon-button" aria-label="사이드바 닫기" title="사이드바 닫기"><span class="icon icon-sidebar" aria-hidden="true"></span></button>
+        <span class="sidebar-head-space"></span>
+        <button id="sidebar-inbox" class="icon-button" aria-label="받은 알림" title="받은 알림"><span class="icon icon-inbox" aria-hidden="true"></span><span class="inbox-badge" hidden></span></button>
+        <button id="new-page" class="icon-button" aria-label="새 페이지" title="새 페이지"><span class="icon icon-compose" aria-hidden="true"></span></button>
+      </div>
+      <form id="search-form" role="search" class="sidebar-search"><span class="icon icon-search" aria-hidden="true"></span><input id="search" aria-label="전체 검색" placeholder="검색" autocomplete="off"><kbd class="search-kbd" aria-hidden="true">⌘K</kbd><button class="visually-hidden">검색</button></form>
+      <div id="sidebar-body"></div>
+      <div class="sidebar-foot">
+        <button id="workspace-menu" type="button" class="workspace-switcher" aria-haspopup="menu" aria-label="워크스페이스 메뉴"><img class="workspace-mark app" src="/app/favicon.svg" width="20" height="20" alt="" draggable="false"><span class="workspace-name">로컬 워크스페이스</span><span class="icon icon-chevron-down" aria-hidden="true"></span></button>
+        <button id="sidebar-trash" class="icon-button" aria-label="휴지통" title="휴지통"><span class="icon icon-trash" aria-hidden="true"></span></button>
+      </div>
+    </nav>
+    <div id="frame">
+      <header class="topbar">
+        <button id="sidebar-open" class="icon-button" aria-label="사이드바 열기" title="사이드바 열기" hidden><span class="icon icon-sidebar" aria-hidden="true"></span></button>
+        <nav id="crumbs" aria-label="현재 위치"></nav>
+        <div class="topbar-actions">
+          <output id="status" role="status" aria-live="polite">불러오는 중…</output>
+          <button id="retry" hidden>보류한 저장 재시도</button>
+          <button id="reload" class="icon-button" aria-label="새로 읽기" title="새로 읽기"><span class="icon icon-refresh" aria-hidden="true"></span></button>
+          <button id="undo" class="icon-button" disabled aria-label="되돌리기" title="되돌리기"><span class="icon icon-undo" aria-hidden="true"></span></button>
+          <button id="redo" class="icon-button" disabled aria-label="다시 실행" title="다시 실행"><span class="icon icon-redo" aria-hidden="true"></span></button>
+          <button id="history" class="icon-button" aria-label="변경 기록" title="변경 기록"><span class="icon icon-history" aria-hidden="true"></span></button>
+          <button id="runs" class="icon-button" aria-label="에이전트 기록" title="에이전트 기록"><span class="icon icon-agent" aria-hidden="true"></span></button>
+          <span id="page-actions"></span>
+        </div>
+      </header>
+      <main id="main"></main>
+    </div>
+  </div>
+  <div id="toast" aria-hidden="true" hidden></div>
+  <script type="module" src="/app.mjs"></script>
+</body></html>

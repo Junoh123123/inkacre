@@ -1,0 +1,6 @@
+<!doctype html><html><head><meta charset="utf-8"><title>sandbox</title></head><body><h1 id="h">점검 HTML</h1><p id="parent">?</p><p id="api">?</p>
+<script>
+document.getElementById('h').textContent = '스크립트 실행됨';
+try { parent.document.title; document.getElementById('parent').textContent = 'parent-open'; } catch (e) { document.getElementById('parent').textContent = 'parent-blocked'; }
+fetch('/api/state').then(r => r.text()).then(() => { document.getElementById('api').textContent = 'api-open'; }).catch(() => { document.getElementById('api').textContent = 'api-blocked'; });
+</script></body></html>

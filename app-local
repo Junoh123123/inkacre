@@ -1,0 +1,28 @@
+#!/bin/sh
+set -eu
+APP_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+# Node: $PAGEYARD_NODE, else one kept in a local toolchain folder beside the app (.<name>toolchain/node-*/bin/node,
+# ignored by git), else the one on PATH.
+APP_NODE="${PAGEYARD_NODE:-}"
+if [ -z "$APP_NODE" ]; then
+  for candidate in "$APP_ROOT"/.*toolchain/node-*/bin/node; do [ -x "$candidate" ] && APP_NODE=$candidate && break; done
+fi
+if [ -z "$APP_NODE" ]; then APP_NODE=$(command -v node); fi
+cd "$APP_ROOT"
+case "${1:-server}" in
+  start) shift; exec "$APP_NODE" bin/cli.mjs start "$@" ;;
+  server) shift 2>/dev/null || true; exec "$APP_NODE" src/server.mjs "$@" ;;
+  live) shift
+    # Daily-use copy made by scripts/migrate-live-copy.mjs (the original data/ stays untouched).
+    LIVE_DATA="${LOCAL_WORKSPACE_DATA:-$APP_ROOT/data-live}"
+    if [ ! -f "$LIVE_DATA/workspace.sqlite" ]; then echo "사본이 없습니다: $LIVE_DATA (먼저 ./app-local scripts/migrate-live-copy.mjs --from data --to data-live)" >&2; exit 1; fi
+    export LOCAL_WORKSPACE_DATA="$LIVE_DATA"
+    export LOCAL_WORKSPACE_PORT="${LOCAL_WORKSPACE_PORT:-4142}"
+    exec "$APP_NODE" src/server.mjs "$@" ;;
+  mcp) shift; exec "$APP_NODE" src/mcp.mjs "$@" ;;
+  capture) shift; exec "$APP_NODE" bin/cli.mjs capture --port "${LOCAL_WORKSPACE_PORT:-4142}" "$@" ;;
+  seed) shift; exec "$APP_NODE" src/seed.mjs "$@" ;;
+  restore) shift; exec "$APP_NODE" src/restore.mjs "$@" ;;
+  test) shift; exec "$APP_NODE" --test test/*.test.mjs "$@" ;;
+  *) exec "$APP_NODE" "$@" ;;
+esac

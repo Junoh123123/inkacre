@@ -1,0 +1,4 @@
+import hljs from '/highlight.mjs';
+import javascript from '/highlight-languages/javascript.js';import python from '/highlight-languages/python.js';import json from '/highlight-languages/json.js';import sql from '/highlight-languages/sql.js';import xml from '/highlight-languages/xml.js';import css from '/highlight-languages/css.js';import bash from '/highlight-languages/bash.js';import typescript from '/highlight-languages/typescript.js';import markdown from '/highlight-languages/markdown.js';
+for(const [name,language]of Object.entries({javascript,python,json,sql,xml,css,bash,typescript,markdown}))hljs.registerLanguage(name,language);
+export function highlightCode(text,language){const lang=({js:'javascript',ts:'typescript',py:'python',html:'xml',sh:'bash',md:'markdown'})[language]??language;return hljs.getLanguage(lang)?hljs.highlight(text,{language:lang,ignoreIllegals:true}).value:null;}

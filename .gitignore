@@ -1,0 +1,37 @@
+# Only files that could be published go into git; data, notes and tools of this computer stay on its disk
+# (list your own in .git/info/exclude).
+
+# dependencies and build caches
+node_modules/
+ui/node_modules/
+coverage/
+
+# workspace data (yours, never in git) — only at the top level; ui/src/data is source code
+/data/
+/data-*/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+
+# local research, browser captures, and internal handoffs
+/research/
+/README.internal.md
+/CLAUDE-UI-HANDOFF.md
+/*-desktop-handoff.md
+/scripts/audit-*-parity.mjs
+*.har
+
+# local check reports, toolchains and agent settings
+verification/
+/.*toolchain/
+.codex/
+
+# downloadable packages built by scripts/package.mjs
+/dist/
+
+# OS and logs
+.DS_Store
+*.log
+
+# local screenshots
+ui/shots/

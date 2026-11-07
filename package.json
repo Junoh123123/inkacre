@@ -1,0 +1,38 @@
+{
+  "name": "inkacre",
+  "version": "0.1.2",
+  "private": true,
+  "description": "Inkacre — pages, blocks and databases in one SQLite file on your computer, with an MCP server for AI agents.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "inkacre": "bin/cli.mjs",
+    "pageyard": "bin/cli.mjs"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "web/",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22.16"
+  },
+  "scripts": {
+    "start": "node bin/cli.mjs",
+    "test": "node --test test/*.test.mjs",
+    "build": "npm --prefix ui run build",
+    "mcp": "node bin/cli.mjs mcp"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "fflate": "0.8.3",
+    "highlight.js": "11.12.0",
+    "ipaddr.js": "2.5.0",
+    "katex": "0.19.0",
+    "markdown-it": "15.0.3",
+    "nodemailer": "10.2.1",
+    "parse5": "8.0.1",
+    "zod": "4.6.7"
+  }
+}

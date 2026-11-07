@@ -1,0 +1,8 @@
+# The image needs only the app (see Dockerfile); everything else stays out of the build context.
+*
+!LICENSE
+!package.json
+!package-lock.json
+!bin/
+!src/
+!web/

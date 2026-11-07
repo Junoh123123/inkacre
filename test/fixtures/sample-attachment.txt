@@ -1,0 +1,4 @@
+MOCK ATTACHMENT FOR TEST
+fixture=7381
+한국어 첨부 검증
+No personal or business data.

@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "inkacre": {
+      "command": "/absolute/path/to/inkacre/app-local",
+      "args": ["mcp"],
+      "env": { "LOCAL_WORKSPACE_URL": "http://127.0.0.1:4141" }
+    }
+  }
+}
